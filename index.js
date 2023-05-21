@@ -30,6 +30,19 @@ async function run() {
     
 
     const toyCollection = client.db('toyDB').collection('Toys')
+    const categoryToyCollection = client.db('toyDB').collection('CategoryToy')
+
+
+
+
+    app.get('/categoryToy', async (req, res)=>{
+      const cursor = categoryToyCollection.find();
+      const result = await cursor.toArray();
+      res.send(result)
+    })
+
+
+    
 
 
     app.get('/allToy', async (req, res)=>{
@@ -43,6 +56,18 @@ async function run() {
       console.log(toyInfo);
       const result = await toyCollection.insertOne(toyInfo);
       res.send(result)
+    })
+
+    // toy details
+    app.get('/toyDetails/:id', async (req, res) => {
+      try {
+        const id = req.params.id;
+        const query = {_id : new ObjectId(id)}
+        const result = await toyCollection.findOne(query);
+        res.send(result)        
+      } catch (error) {
+        res.send(error.message)
+      }
     })
 
     //My Toys
