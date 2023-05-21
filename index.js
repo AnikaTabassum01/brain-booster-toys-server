@@ -65,16 +65,16 @@ async function run() {
     })
 
     // toy details
-    // app.get('/toyDetails/:id', async (req, res) => {
-    //   try {
-    //     const id = req.params.id;
-    //     const query = {_id : new ObjectId(id)}
-    //     const result = await toyCollection.findOne(query);
-    //     res.send(result)        
-    //   } catch (error) {
-    //     res.send(error.message)
-    //   }
-    // })
+    app.get('/toyDetails/:id', async (req, res) => {
+      try {
+        const id = req.params.id;
+        const query = {_id : new ObjectId(id)}
+        const result = await toyCollection.findOne(query);
+        res.send(result)        
+      } catch (error) {
+        res.send(error.message)
+      }
+    })
 
     //My Toys
     app.get('/myToy', async (req, res)=>{
